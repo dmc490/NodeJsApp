@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-Book = require('./models/book');
+Book = require('../models/book');
 
 router.get('/api/books', function(req,res){
     Book.getBooks(function(err,books){

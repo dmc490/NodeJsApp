@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-Genre = require('./models/genre');
+Genre = require('../models/genre');
 
 router.get('/api/genres', function(req,res){
     Genre.getGenres(function(err,genres){

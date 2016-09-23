@@ -4,49 +4,51 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+
+
+var books = require('./routes/books');
+var genres = require('./routes/genres');
+
 app.use(bodyParser.json());
+app.use('/',books);
+app.use('/',genres);
 
-Genre = require('./models/genre');
-Book = require('./models/book');
 
-mongoose.connect('mongodb://localhost/bookstore');
-//var db = mongoose.connection;
+/*mongoose.connect('mongodb://localhost/bookstore');
+
+var db = mongoose.connection;
+db.on('close', function() {
+  console.log("closed DB");
+  dbAvailable = false;
+});*/
+
+// Handler in case Mongo  goes down
+app.use(function(req, res, next) {
+
+  // We lost connection!
+  if (!mongoose.connection.readyState) {
+    console.log("reconnecting");
+    // Reconnect if we can
+    mongoose.connect('mongodb://localhost/bookstore');
+    //res.status(503);
+    if (!mongoose.connection.readyState) {
+      throw new Error('Mongo not available');
+    }
+  }
+  next();
+
+});
+
+
+
+
+
+
 
 app.get('/', function(req,res){
   res.send('hello aworld');
 });
-app.get('/api/genres', function(req,res){
-  Genre.getGenres(function(err,genres){
-    if(err){
-      throw err;
-    }
-    res.json(genres);
-  });
-});
-app.post('/api/genres', function(req,res){
-  var genre = req.body;
-  Genre.addGenre(genre,function(err,genre){
-    if(err){
-      throw err;
-    }
-    res.json(genre);
-  });
-});
-app.get('/api/books', function(req,res){
-  Book.getBooks(function(err,books){
-    if(err){
-      throw err;
-    }
-    res.json(books);
-  });
-});
-app.get('/api/books/:_id', function(req,res){
-  Book.getBookById(req.params._id,function(err,book){
-    if(err){
-      throw err;
-    }
-    res.json(book);
-  });
-});
+
+
 app.listen(3000);
 console.log('running port');

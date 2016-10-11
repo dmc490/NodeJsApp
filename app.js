@@ -3,17 +3,17 @@ var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
-
+var fs = require('fs');
+var _ = require('lodash');
 
 var books = require('./routes/books');
 var genres = require('./routes/genres');
+var reactApp = require('./routes/react-app');
 
 app.use(bodyParser.json());
 app.use('/',books);
 app.use('/',genres);
-
-
+app.use('/',reactApp);
 /*mongoose.connect('mongodb://localhost/bookstore');
 
 var db = mongoose.connection;

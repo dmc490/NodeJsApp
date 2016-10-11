@@ -7,7 +7,6 @@ function printTri(depth){
             TriArray[row].push([0]);
             var rightValue = col-1 > -1 ? ansectorRow[col-1]: 0 ;
             var leftValue = col < ansectorRow.length ? ansectorRow[col] : 0;
-
             TriArray[row][col] =+ rightValue + leftValue;
         }
     }

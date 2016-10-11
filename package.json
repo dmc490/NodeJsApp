@@ -2,7 +2,7 @@
   "name": "start1",
   "version": "0.0.0",
   "private": true,
-  "main":"app.js",
+  "main": "app.js",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -12,7 +12,8 @@
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "express": "~4.13.4",
-    "mongoose":"*",
+    "lodash": "^4.16.2",
+    "mongoose": "*",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }

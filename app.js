@@ -14,13 +14,6 @@ app.use(bodyParser.json());
 app.use('/',books);
 app.use('/',genres);
 app.use('/',reactApp);
-/*mongoose.connect('mongodb://localhost/bookstore');
-
-var db = mongoose.connection;
-db.on('close', function() {
-  console.log("closed DB");
-  dbAvailable = false;
-});*/
 
 // Handler in case Mongo  goes down
 app.use(function(req, res, next) {
